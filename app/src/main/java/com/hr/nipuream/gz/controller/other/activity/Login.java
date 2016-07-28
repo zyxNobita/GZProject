@@ -22,7 +22,8 @@ import carbon.widget.Toolbar;
 
 public class Login extends BaseActivity {
 
-    private EditText userNameEt,pwdEt;
+    //陈定龙到此一游，咯啦啦啦啦
+    private EditText userNameEt, pwdEt;
     private Button submitBtn;
     private LoginBaseTask loginBaseTask;
 
@@ -32,7 +33,7 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
 //        initTitleBar();
 
-        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.login));
 
         setViews();
@@ -44,47 +45,46 @@ public class Login extends BaseActivity {
         loginBaseTask = (LoginBaseTask) OtherBeanFactory.getInstance().newOthersInstance("login");
     }
 
-    private void login(String userName, String pwd, String typeId){
-        try{
+    private void login(String userName, String pwd, String typeId) {
+        try {
             Bundle bundle = new Bundle();
-            bundle.putString(LoginBaseTask.USER_NAME,userName);
-            bundle.putString(LoginBaseTask.PASS_WORD,pwd);
-            bundle.putString(LoginBaseTask.TYPE_ID,typeId);
+            bundle.putString(LoginBaseTask.USER_NAME, userName);
+            bundle.putString(LoginBaseTask.PASS_WORD, pwd);
+            bundle.putString(LoginBaseTask.TYPE_ID, typeId);
             loginBaseTask.addOneBean(bundle, NetQueryStyle.VOLLEY);
-        }catch (Exception e){
+        } catch (Exception e) {
             Logger.getLogger().e("login error");
         }
     }
 
-    private void setViews(){
+    private void setViews() {
 //        LinearLayout goBack = (LinearLayout)findViewById(R.id.header_back);
 //        goBack.setVisibility(View.INVISIBLE);
 //        TextView title = (TextView)findViewById(R.id.header_title);
 //        title.setText(this.getResources().getString(R.string.login));
-        userNameEt = (EditText)findViewById(R.id.login_user_name_et);
-        pwdEt = (EditText)findViewById(R.id.login_user_pwd);
-        submitBtn = (Button)findViewById(R.id.submit_btn);
+        userNameEt = (EditText) findViewById(R.id.login_user_name_et);
+        pwdEt = (EditText) findViewById(R.id.login_user_pwd);
+        submitBtn = (Button) findViewById(R.id.submit_btn);
         submitBtn.setOnClickListener(this);
     }
 
-    private String userName,pwd;
+    private String userName, pwd;
 
     @Override
     public void clickView(View view) {
         super.clickView(view);
         int id = view.getId();
-        if(id == R.id.submit_btn){
+        if (id == R.id.submit_btn) {
             userName = userNameEt.getText().toString();
             pwd = pwdEt.getText().toString();
 
-            if(TextUtils.isEmpty(userName) || TextUtils.isEmpty(pwd))
-            {
+            if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(pwd)) {
                 showToast(getString(R.string.login_error));
                 return;
             }
 
             PopLoadDialog(this);
-            login(userName,pwd,"1");
+            login(userName, pwd, "1");
         }
     }
 
@@ -94,26 +94,25 @@ public class Login extends BaseActivity {
         super.updateGZdata(object);
 
         dismissLoadDialog();
-        if(object instanceof LoginBaseTask){
+        if (object instanceof LoginBaseTask) {
             int method = ((LoginBaseTask) object).getExecuteMethod();
-            if(method == NetQueryMethod.ADD_ONE){
+            if (method == NetQueryMethod.ADD_ONE) {
                 int resultCode = ((LoginBaseTask) object).getResultCode();
-                if(resultCode == NetTaskInterface.REQUEST_SUCCESSFUL){
-                    LoginBean  loginBean =
+                if (resultCode == NetTaskInterface.REQUEST_SUCCESSFUL) {
+                    LoginBean loginBean =
                             (LoginBean) ((LoginBaseTask) object).getBean();
                     showToast(loginBean.getMessage());
-                    SpUtil.getInstance().insertToxml(userName,pwd);
-                    SpUtil.getInstance().insertToxml(SpUtil.SP_ISLOGIN,"true");
+                    SpUtil.getInstance().insertToxml(userName, pwd);
+                    SpUtil.getInstance().insertToxml(SpUtil.SP_ISLOGIN, "true");
 
-                    startActivity(new Intent(this,MainActivity.class));
+                    startActivity(new Intent(this, MainActivity.class));
                     this.finish();
 
-                }else
+                } else
                     showToast(getResources().getString(R.string.net_error));
             }
         }
     }
-
 
 
 }
