@@ -29,22 +29,23 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
+
     private ViewPager vp;
-    private TextView firstPageTv,gzManagerTv,settingTv;
+    private TextView firstPageTv, gzManagerTv, settingTv;
     private List<Fragment> fragmentLists = new ArrayList<>();
 
 
     @Override
     public void handleMessage(Message msg) {
         super.handleMessage(msg);
-        try{
-            switch(msg.what){
+        try {
+            switch (msg.what) {
                 case DOWN_LOAD_APPLICATION:
                     boolean isDownLoad = (Boolean) msg.obj;
-                    if(isDownLoad){
+                    if (isDownLoad) {
                         //开启服务下载新版本软件
-                        if(updateBean != null){
-                            Intent intent = new Intent(MainActivity.this,UpdateVersionServer.class);
+                        if (updateBean != null) {
+                            Intent intent = new Intent(MainActivity.this, UpdateVersionServer.class);
                             intent.putExtra(UpdateVersionServer.NEW_VERSION_APP_INFORMATION, updateBean);
                             startService(intent);
                             showToast(getString(R.string.start_download));
@@ -52,7 +53,7 @@ public class MainActivity extends BaseActivity {
                     }
                     break;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
@@ -79,23 +80,23 @@ public class MainActivity extends BaseActivity {
         updateBaseTask = (UpdateBaseTask) OtherBeanFactory.getInstance().newOthersInstance("update");
     }
 
-    private void checkUpdate(){
+    private void checkUpdate() {
         Bundle bundle = new Bundle();
-        bundle.putString(UpdateBaseTask.TYPE_ID,"1");
+        bundle.putString(UpdateBaseTask.TYPE_ID, "1");
         updateBaseTask.queryOneBean(bundle, NetQueryStyle.VOLLEY);
     }
 
-    private void createFragment(){
+    private void createFragment() {
         fragmentLists.add(FirstFragment.getInstance(null));
         fragmentLists.add(GzManagerFragment.getInstance(null));
         fragmentLists.add(SettingFragment.getInstance(null));
     }
 
-    private void setViews(){
-        vp = (ViewPager)findViewById(R.id.main_viewpager);
-        firstPageTv = (TextView)findViewById(R.id.first_page_tv);
-        settingTv = (TextView)findViewById(R.id.setting_tv);
-        gzManagerTv = (TextView)findViewById(R.id.guozi_manager);
+    private void setViews() {
+        vp = (ViewPager) findViewById(R.id.main_viewpager);
+        firstPageTv = (TextView) findViewById(R.id.first_page_tv);
+        settingTv = (TextView) findViewById(R.id.setting_tv);
+        gzManagerTv = (TextView) findViewById(R.id.guozi_manager);
 
         firstPageTv.setOnClickListener(this);
         settingTv.setOnClickListener(this);
@@ -106,7 +107,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void clickView(View view) {
         super.clickView(view);
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.first_page_tv:
                 vp.setCurrentItem(0);
                 break;
@@ -119,8 +120,8 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void initVp(){
-        FirstPageAdapter adapter = new FirstPageAdapter(this.getSupportFragmentManager(),fragmentLists);
+    private void initVp() {
+        FirstPageAdapter adapter = new FirstPageAdapter(this.getSupportFragmentManager(), fragmentLists);
         vp.setAdapter(adapter);
     }
 
@@ -129,30 +130,30 @@ public class MainActivity extends BaseActivity {
     @Override
     public void updateGZdata(Object object) {
         super.updateGZdata(object);
-        if(object instanceof UpdateBaseTask){
+        if (object instanceof UpdateBaseTask) {
             updateBean = (UpdateBean) ((UpdateBaseTask) object).getBean();
             Logger.getLogger().d(updateBean.toString());
-            if(updateBean!=null)
-                if(!Util.getVerName().equals(updateBean.getVersionIndex()))
-                    doNewVersionUpdate(getMyHandler(),updateBean);
+            if (updateBean != null)
+                if (!Util.getVerName().equals(updateBean.getVersionIndex()))
+                    doNewVersionUpdate(getMyHandler(), updateBean);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        try{
+        try {
 
-            if(requestCode == FirstFragment.REQUEST_CODE_SCAN
-                    && resultCode == Activity.RESULT_OK){
+            if (requestCode == FirstFragment.REQUEST_CODE_SCAN
+                    && resultCode == Activity.RESULT_OK) {
                 Bundle bundle = data.getExtras();
                 String code = bundle.getString("result");
 
                 Intent intent = new Intent(MainActivity.this, GZDetail.class);
-                intent.putExtra("code",code);
+                intent.putExtra("code", code);
                 startActivity(intent);
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Logger.getLogger().e(e.toString());
         }
         super.onActivityResult(requestCode, resultCode, data);
