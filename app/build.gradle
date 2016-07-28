@@ -1,0 +1,68 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'org.greenrobot.greendao'
+
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "com.hr.nipuream.gz"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "v1.0"
+        renderscriptTargetApi 20
+        renderscriptSupportModeEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+buildscript {
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.0.0'
+    }
+}
+
+apt {
+    arguments {
+        eventBusIndex "com.example.myapp.MyEventBusIndex"
+    }
+}
+
+greendao {
+    schemaVersion 2
+    daoPackage "com.hr.nipuream.gz.dao.db"
+    targetGenDir "E://github/GZ/GZ/app/src/main/java"
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile project(':volleyPlus')
+    compile project(':EventBus')
+    apt project(':EventBusAnnotationProcessor')
+    compile project(':carbon')
+    compile project(':xrecyclerview')
+    compile project(':yh-widget:yh-widget')
+    compile files('libs/zxing.jar')
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:support-v4:23.2.1'
+    compile 'org.greenrobot:greendao:3.0.1'
+    compile 'org.greenrobot:greendao-generator:3.0.0'
+}

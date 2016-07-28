@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    
+    <LinearLayout
+        android:id="@+id/header_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="63dp"
+        android:background="#29B2B2"
+        android:orientation="vertical" >
+
+        <View
+            android:id="@+id/app_header_gasp"
+            android:layout_width="fill_parent"
+            android:layout_height="15dp"
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            >
+   <LinearLayout
+                android:id="@+id/header_back"
+                android:layout_width="80dip"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/jya" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="返回"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/header_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="#f1f1f1"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/header_edit"
+            android:layout_width="80dip"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        </LinearLayout>
+        
+    </LinearLayout>
+    
+
+</merge>

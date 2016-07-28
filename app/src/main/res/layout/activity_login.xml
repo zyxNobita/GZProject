@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    app:carbon_insetColor="?attr/colorPrimary">
+
+    <!--<include-->
+        <!--layout="@layout/app_header_layout"-->
+        <!--/>-->
+
+    <carbon.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:carbon_icon="@null" />
+
+        <!--<carbon.widget.ImageView-->
+            <!--android:id="@+id/debug"-->
+            <!--style="@style/carbon_ImageView.Icon"-->
+            <!--android:layout_width="@dimen/carbon_toolbarItemSize"-->
+            <!--android:layout_height="@dimen/carbon_toolbarItemSize"-->
+            <!--app:carbon_src="@raw/ic_bug_report_24px"-->
+            <!--app:carbon_tint="?attr/colorControlNormal"/>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="帐号"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/gray"
+            />
+
+        <EditText
+            android:id="@+id/login_user_name_et"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:background="@null"
+            />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_grap_bg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="密码"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/gray"
+            />
+
+        <EditText
+            android:id="@+id/login_user_pwd"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:background="@null"
+            android:inputType="textPassword"
+            />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_grap_bg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+
+    <!--<carbon.widget.Button-->
+        <!--android:id="@+id/submit_btn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_margin="@dimen/carbon_padding"-->
+        <!--android:paddingLeft="@dimen/carbon_padding"-->
+        <!--android:paddingRight="@dimen/carbon_padding"-->
+        <!--android:textSize="16sp"-->
+        <!--android:tag="enable"-->
+        <!--android:text="登录"-->
+        <!--android:textColor="@color/white"-->
+        <!--app:carbon_rippleColor="#42ffffff"-->
+        <!--app:carbon_rippleStyle="over"-->
+        <!--app:carbon_touchMargin="6dp"-->
+        <!--app:carbon_touchMarginBottom="6dp"-->
+        <!--app:carbon_touchMarginLeft="100dp"-->
+        <!--app:carbon_touchMarginRight="100dp"-->
+        <!--app:carbon_touchMarginTop="6dp"-->
+        <!--/>-->
+
+    <carbon.widget.Button
+        android:id="@+id/submit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:text="登录"
+        app:carbon_cornerRadius="2dp"
+        app:carbon_rippleColor="#42ffffff"
+        app:carbon_rippleStyle="over"
+        app:carbon_touchMargin="6dp"/>
+
+
+</carbon.widget.LinearLayout>

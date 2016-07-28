@@ -1,0 +1,28 @@
+<carbon.widget.LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hr.nipuream.gz.controller.main.fragment.GZRepairList"
+    app:carbon_insetColor="?attr/colorPrimary"
+    app:carbon_rippleColor="?attr/carbon_rippleColor"
+    >
+
+
+    <carbon.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/gz_repair_recyleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        />
+
+</carbon.widget.LinearLayout>

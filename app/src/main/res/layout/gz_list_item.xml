@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.CardView style="@style/carbon_CardView"
+    android:id="@+id/gz_list_carview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:carbon_insetColor="?attr/colorPrimary"
+    app:carbon_rippleColor="?attr/carbon_rippleColor"
+    android:clickable="true"
+    >
+
+
+    <carbon.widget.ImageView
+        android:id="@+id/gz_list_item_iv"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_margin="@dimen/carbon_padding"
+        android:scaleType="centerCrop"
+        app:carbon_cornerRadius="0dp"
+        />
+
+
+    <carbon.widget.LinearLayout
+        android:padding="10dp"
+        android:layout_toRightOf="@+id/gz_list_item_iv"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="150dp">
+
+        <carbon.widget.TextView
+            android:id="@+id/gz_list_item_zcid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/carbon_padding"
+            android:paddingRight="@dimen/carbon_padding"
+            android:singleLine="true"
+            android:text="国资编号"
+            android:textAppearance="?attr/carbon_textAppearanceBody2"
+            />
+
+        <carbon.widget.TextView
+            android:id="@+id/gz_list_item_zcmc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/carbon_padding"
+            android:paddingRight="@dimen/carbon_padding"
+            android:singleLine="true"
+            android:text="资产名称"
+            android:textAppearance="?attr/carbon_textAppearanceBody2"
+            />
+
+        <carbon.widget.TextView
+            android:id="@+id/gz_list_item_zcxz"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/carbon_padding"
+            android:paddingRight="@dimen/carbon_padding"
+            android:singleLine="true"
+            android:text="国资现状"
+            android:textAppearance="?attr/carbon_textAppearanceBody2"
+            />
+
+        <carbon.widget.TextView
+            android:id="@+id/gz_list_item_zczt"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/carbon_padding"
+            android:paddingRight="@dimen/carbon_padding"
+            android:singleLine="true"
+            android:text="国资状态"
+            android:textAppearance="?attr/carbon_textAppearanceBody2"
+            />
+
+
+
+
+
+    </carbon.widget.LinearLayout>
+
+
+
+
+</carbon.widget.CardView>

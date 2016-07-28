@@ -1,0 +1,7 @@
+include ':app'
+include ':volleyPlus'
+include ':EventBus'
+include ':EventBusAnnotationProcessor'
+include ':carbon'
+include ':xrecyclerview'
+include ':yh-widget:yh-widget'

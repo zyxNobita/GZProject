@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    app:carbon_insetColor="?attr/colorPrimary">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_grap_bg"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        >
+
+        <carbon.widget.TextView
+            style="@style/carbon_TextView"
+            android:id="@+id/first_page_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="首页"
+            android:textColor="#505050"
+            android:textSize="18sp"
+            android:gravity="center"
+            app:carbon_rippleColor="#40ff0000"
+            app:carbon_touchMarginBottom="6dp"
+            app:carbon_touchMarginLeft="100dp"
+            app:carbon_touchMarginRight="100dp"
+            app:carbon_touchMarginTop="6dp"
+            app:carbon_backgroundTint="@null"
+            />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/app_grap_bg"
+            />
+
+        <carbon.widget.TextView
+            style="@style/carbon_TextView"
+            android:id="@+id/guozi_manager"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="国资管理"
+            android:textColor="#505050"
+            android:textSize="18sp"
+            app:carbon_rippleColor="#40ff0000"
+            android:gravity="center"
+            app:carbon_touchMarginBottom="6dp"
+            app:carbon_touchMarginLeft="100dp"
+            app:carbon_touchMarginRight="100dp"
+            app:carbon_touchMarginTop="6dp"
+            app:carbon_backgroundTint="@null"
+            />
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/app_grap_bg"
+            />
+
+
+        <carbon.widget.TextView
+            style="@style/carbon_TextView"
+            android:id="@+id/setting_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="设置"
+            android:textColor="#505050"
+            android:textSize="18sp"
+            android:gravity="center"
+            app:carbon_rippleColor="#40ff0000"
+            app:carbon_touchMarginBottom="6dp"
+            app:carbon_touchMarginLeft="100dp"
+            app:carbon_touchMarginRight="100dp"
+            app:carbon_touchMarginTop="6dp"
+            app:carbon_backgroundTint="@null"
+            />
+
+
+    </LinearLayout>
+    
+
+
+</carbon.widget.LinearLayout>

@@ -1,0 +1,116 @@
+<com.huizai.widget.view.StatelliteMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:yh="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/id_statellite_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    yh:statellitemenu_position="left_bottom"
+    yh:statellitemenu_radius="100dp" >
+
+    <RelativeLayout
+        android:layout_width="55dip"
+        android:layout_height="55dip"
+        android:background="@drawable/composer_button" >
+
+        <ImageView
+            android:id="@+id/id_button"
+            android:layout_width="35dip"
+            android:layout_height="35dip"
+            android:layout_centerInParent="true"
+            android:src="@drawable/composer_icn_plus" />
+    </RelativeLayout>
+
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <ImageView
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:src="@drawable/composer_location"
+        android:tag="location" />
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="定位"
+        android:textSize="12sp"
+        android:textColor="#E93534"
+          android:layout_gravity="center_horizontal"
+        />
+    </LinearLayout>
+
+    
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <ImageView
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:src="@drawable/composer_traffic"
+        android:tag="Traffic" />
+        
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="交通"
+        android:textSize="12sp"
+        android:textColor="#E93534"
+          android:layout_gravity="center_horizontal"
+        />
+    </LinearLayout>
+
+    
+<!--         <LinearLayout  -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:orientation="vertical" -->
+<!--         > -->
+<!--     <ImageView -->
+<!--         android:layout_width="40dip" -->
+<!--         android:layout_height="40dip" -->
+<!--         android:src="@drawable/composer_luopan" -->
+<!--         android:tag="luopan" /> -->
+    
+<!--         <TextView  -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:text="罗盘" -->
+<!--         android:textSize="12sp" -->
+<!--         android:textColor="#E93534" -->
+<!--           android:layout_gravity="center_horizontal" -->
+<!--         /> -->
+<!--     </LinearLayout> -->
+    
+        
+        <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <ImageView
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:src="@drawable/composer_trance"
+        android:tag="trace" />
+    
+     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="轨迹"
+        android:textSize="12sp"
+        android:textColor="#E93534"
+          android:layout_gravity="center_horizontal"
+        />
+    </LinearLayout>
+
+<!--     <ImageView -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:src="@drawable/composer_with" -->
+<!--         android:tag="People" /> -->
+
+</com.huizai.widget.view.StatelliteMenu>

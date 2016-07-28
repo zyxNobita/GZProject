@@ -1,0 +1,33 @@
+<carbon.widget.LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    app:carbon_insetColor="?attr/colorPrimary"
+    app:carbon_rippleColor="?attr/carbon_rippleColor"
+    tools:context="com.hr.nipuream.gz.controller.main.fragment.SearchGzFragment">
+
+
+    <include
+        layout="@layout/gz_search_layout"
+        />
+
+    <ListView
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:id="@+id/search_gz_lv"
+        android:layout_width="match_parent"
+        android:background="#F0EFEF"
+        android:layout_height="wrap_content"
+        android:scrollingCache="false"
+        android:animationCache="false"
+        android:divider="#45808080"
+        android:dividerHeight="1px"
+        android:fadingEdge="none"
+        />
+
+
+</carbon.widget.LinearLayout>

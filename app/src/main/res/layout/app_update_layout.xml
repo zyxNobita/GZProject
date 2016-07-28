@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/corners_car_bdbg"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <!--<RelativeLayout -->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="50dip"-->
+            <!--android:background="@color/app_exit_color"-->
+            <!--&gt;-->
+            <!---->
+            <!--<TextView -->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="更新提示"-->
+                <!--android:textSize="20sp"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--/>-->
+            <!---->
+            <!--<ImageView -->
+                <!--android:id="@+id/app_update_exit"-->
+                <!--android:layout_width="40dip"-->
+                <!--android:layout_height="40dip"-->
+                <!--android:padding="12dp"-->
+                <!--android:src="@mipmap/yh_delete"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginRight="20dip" -->
+                <!--/>-->
+            <!---->
+        <!--</RelativeLayout>-->
+
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:text="【版本更新】"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dip"
+            android:textColor="#505050"
+            android:layout_marginTop="10dp"
+            />
+        
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="30dip"
+            android:text="更新说明："
+            android:textSize="16sp"
+            android:textColor="#505050"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15sp"
+            android:paddingLeft="8dp"
+            />
+        
+        <ScrollView 
+            android:layout_width="fill_parent"
+            android:layout_height="120dip"
+            android:fadingEdge="none"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollingCache="false" 
+            >
+               <TextView 
+            android:id="@+id/update_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="25dip"
+            android:paddingRight="25dip"
+            android:textSize="16sp"
+            android:textColor="#505050"
+            android:lineSpacingExtra="5dip"
+            />
+            
+        </ScrollView>
+        
+        <!---->
+        <!--<com.huizai.materialdesign.views.ButtonRectangle-->
+            <!--android:id="@+id/app_update_ok"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="50dip"-->
+            <!--android:text="升   级"-->
+            <!--android:background="@color/app_exit_color"-->
+            <!--android:layout_marginTop="20dip"-->
+            <!--android:layout_marginLeft="30dip"-->
+            <!--android:layout_marginRight="30dip"-->
+            <!--android:layout_marginBottom="20dip"-->
+            <!--yh:rippleSpeed="80"-->
+            <!--/>-->
+
+        <carbon.widget.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            >
+            <carbon.widget.Button
+                android:id="@+id/app_update_ok"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="35dip"
+                android:tag="enable"
+                android:layout_margin="@dimen/carbon_padding"
+                app:carbon_rippleColor="#42ffffff"
+                app:carbon_rippleStyle="over"
+                app:carbon_touchMargin="6dp"
+                android:text="升 级" />
+
+            <carbon.widget.Button
+                android:id="@+id/app_update_exit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="35dip"
+                android:tag="enable"
+                android:layout_margin="@dimen/carbon_padding"
+                app:carbon_rippleColor="#42ffffff"
+                app:carbon_rippleStyle="over"
+                app:carbon_touchMargin="6dp"
+                android:text="忽 略" />
+
+        </carbon.widget.LinearLayout>
+
+
+        
+        
+    </LinearLayout>
+    
+    
+
+</carbon.widget.RelativeLayout>

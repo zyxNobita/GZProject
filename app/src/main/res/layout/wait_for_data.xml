@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    app:carbon_insetColor="?attr/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <carbon.widget.ProgressBar
+        android:id="@+id/app_progress"
+        app:carbon_progressStyle="circular_indeterminate"
+        android:layout_margin="@dimen/carbon_padding"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:carbon_animateColorChanges="true"
+        app:carbon_barWidth="5dp"
+        app:carbon_tint="#3F51B5"
+        />
+
+</carbon.widget.LinearLayout>
