@@ -23,6 +23,7 @@ import carbon.widget.Toolbar;
 public class Login extends BaseActivity {
 
     //陈定龙到此一游，咯啦啦啦啦
+    //c很定龙第二次旅游。。。。。
     private EditText userNameEt, pwdEt;
     private Button submitBtn;
     private LoginBaseTask loginBaseTask;
