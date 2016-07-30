@@ -6,20 +6,16 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.volley.cache.plus.ImageLoader;
 import com.hr.nipuream.gz.GZApplication;
 import com.hr.nipuream.gz.R;
 import com.hr.nipuream.gz.controller.main.bean.GZbean;
 import com.hr.nipuream.gz.net.Constants;
 import com.hr.nipuream.gz.util.Logger;
-
 import java.util.List;
-
 import carbon.widget.CardView;
 import carbon.widget.ImageView;
 import carbon.widget.TextView;
-
 /**
  * 描述：
  * 作者：Nipuream

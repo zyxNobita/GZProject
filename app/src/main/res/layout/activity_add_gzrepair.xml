@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    app:carbon_insetColor="?attr/colorPrimary"
+    app:carbon_rippleColor="?attr/carbon_rippleColor"
+    tools:context="com.hr.nipuream.gz.controller.main.activity.AddGZRepair">
+
+    <carbon.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <carbon.widget.ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <carbon.widget.RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <carbon.widget.TextView
+            android:id="@+id/gz_add_repair_item_scano"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/carbon_toolbarHeight"
+            android:gravity="center_vertical"
+            android:text="资  产  编  号:"
+            android:paddingLeft="@dimen/carbon_padding"
+            android:paddingRight="@dimen/carbon_padding"
+            android:layout_marginTop="50dp"
+            android:textAppearance="?attr/carbon_textAppearanceBody2" />
+
+        <carbon.widget.EditText
+            android:id="@+id/add_gz_repair_scano_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/gz_add_repair_item_scano"
+            android:hint="请输入资产编号"
+            android:layout_alignBottom="@+id/gz_add_repair_item_scano"
+            app:carbon_floatingLabel="true"
+            android:textAppearance="?attr/carbon_textAppearanceBody2"
+            />
+
+
+        <carbon.widget.TextView
+            android:id="@+id/gz_add_repair_item_persion"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/carbon_toolbarHeight"
+            android:gravity="center_vertical"
+            android:text="维     修     人:"
+            android:paddingLeft="@dimen/carbon_padding"
+            android:layout_below="@+id/gz_add_repair_item_scano"
+            android:paddingRight="@dimen/carbon_padding"
+            android:textAppearance="?attr/carbon_textAppearanceBody2" />
+
+        <carbon.widget.EditText
+            android:id="@+id/add_gz_repair_persion_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/gz_add_repair_item_scano"
+            android:hint="请输入维修人"
+            app:carbon_floatingLabel="true"
+            android:layout_alignBottom="@+id/gz_add_repair_item_persion"
+            android:textAppearance="?attr/carbon_textAppearanceBody2"
+            />
+
+        <carbon.widget.TextView
+            android:id="@+id/gz_add_repair_item_will_compele_time"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/carbon_toolbarHeight"
+            android:gravity="center_vertical"
+            android:text="预计完成时间:"
+            android:paddingLeft="@dimen/carbon_padding"
+            android:layout_below="@+id/gz_add_repair_item_persion"
+            android:textAppearance="?attr/carbon_textAppearanceBody2" />
+
+        <carbon.widget.TextView
+            android:id="@+id/gz_add_repair_item_will_compele_time_select"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/carbon_toolbarHeight"
+            android:gravity="center_vertical|left"
+            android:hint="点击选择时间"
+            android:layout_marginLeft="12dp"
+            android:clickable="true"
+            android:layout_below="@+id/gz_add_repair_item_persion"
+            android:layout_toRightOf="@+id/gz_add_repair_item_will_compele_time"
+            android:textAppearance="?attr/carbon_textAppearanceBody2" />
+
+        <carbon.widget.TextView
+            android:id="@+id/gz_add_repair_item_pro_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/carbon_toolbarHeight"
+            android:gravity="center_vertical"
+            android:text="问   题   描  述:"
+            android:paddingLeft="@dimen/carbon_padding"
+            android:layout_below="@+id/gz_add_repair_item_will_compele_time"
+            android:paddingRight="@dimen/carbon_padding"
+            android:textAppearance="?attr/carbon_textAppearanceBody2" />
+
+
+        <carbon.widget.EditText
+            android:id="@+id/gz_add_repair_item_pro_desc_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/carbon_padding"
+            android:layout_below="@+id/gz_add_repair_item_pro_desc"
+            android:tag="enable"
+            app:carbon_maxCharacters="100"
+            />
+
+        <carbon.widget.Button
+            android:id="@+id/submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:text="提交"
+            android:layout_below="@+id/gz_add_repair_item_pro_desc_et"
+            app:carbon_cornerRadius="2dp"
+            app:carbon_rippleColor="#42ffffff"
+            app:carbon_rippleStyle="over"
+            app:carbon_touchMargin="6dp"
+            android:layout_marginBottom="20dp"
+            />
+
+    </carbon.widget.RelativeLayout>
+
+</carbon.widget.ScrollView>
+
+
+
+
+</carbon.widget.LinearLayout>

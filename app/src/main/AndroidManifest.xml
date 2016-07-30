@@ -74,8 +74,13 @@
 
         <service android:name=".service.UpdateVersionServer" />
 
-        <activity android:name=".controller.main.activity.GZList" />
-        <activity android:name=".controller.main.activity.GZRepair"></activity>
+        <activity
+            android:name=".controller.main.activity.GZList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.main.activity.GZRepair"
+            android:screenOrientation="portrait" />
+        <activity android:name=".controller.main.activity.AddGZRepair"></activity>
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:carbon_insetColor="?attr/colorPrimary"
-    app:carbon_rippleColor="?attr/carbon_rippleColor"
+    app:carbon_rippleColor="#3F51B5"
     app:carbon_cornerRadius="5dp"
     android:clickable="true"
     >

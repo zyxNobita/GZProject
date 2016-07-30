@@ -1,7 +1,6 @@
 package com.hr.nipuream.gz.controller.main.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 描述：
@@ -26,12 +25,17 @@ public class GZRepairbean implements Serializable{
     /**
      * 维修时间
      */
-    private Date maintaintime;
+    private String  maintaintime;
 
     /**
      * 维修人
      */
     private String maintainman;
+
+    /**
+     * 国资名称
+     */
+    private String sacname;
 
     /**
      * 问题描述
@@ -41,12 +45,12 @@ public class GZRepairbean implements Serializable{
     /**
      * 预计维修完成时间
      */
-    private Date ectime;
+    private String  ectime;
 
     /**
      * 创建时间
      */
-    private Date createtime;
+    private String  createtime;
 
     /**
      * 维修状态
@@ -57,7 +61,15 @@ public class GZRepairbean implements Serializable{
     /**
      * 维修完成时间
      */
-    private Date completiontime;
+    private String completiontime;
+
+    public String getSacname() {
+        return sacname;
+    }
+
+    public void setSacname(String sacname) {
+        this.sacname = sacname;
+    }
 
     /**
      * 完成备注
@@ -88,11 +100,11 @@ public class GZRepairbean implements Serializable{
         this.userid = userid;
     }
 
-    public Date getMaintaintime() {
+    public String  getMaintaintime() {
         return maintaintime;
     }
 
-    public void setMaintaintime(Date maintaintime) {
+    public void setMaintaintime(String maintaintime) {
         this.maintaintime = maintaintime;
     }
 
@@ -112,19 +124,19 @@ public class GZRepairbean implements Serializable{
         this.problemdesc = problemdesc;
     }
 
-    public Date getEctime() {
+    public String getEctime() {
         return ectime;
     }
 
-    public void setEctime(Date ectime) {
+    public void setEctime(String ectime) {
         this.ectime = ectime;
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
 
@@ -136,11 +148,11 @@ public class GZRepairbean implements Serializable{
         this.staus = staus;
     }
 
-    public Date getCompletiontime() {
+    public String getCompletiontime() {
         return completiontime;
     }
 
-    public void setCompletiontime(Date completiontime) {
+    public void setCompletiontime(String completiontime) {
         this.completiontime = completiontime;
     }
 

@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -29,6 +30,10 @@ import com.hr.nipuream.gz.controller.other.bean.UpdateBean;
 import com.hr.nipuream.gz.service.UpdateVersionServer;
 import com.hr.nipuream.gz.util.Logger;
 import com.hr.nipuream.gz.util.Util;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,6 +41,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
+import java.util.Calendar;
 
 import carbon.widget.Button;
 import carbon.widget.ProgressBar;
@@ -433,6 +439,44 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         return false;
     }
 
+    //-----------------------------------------------------------------------------------------------------------------
+
+    //*****************************************  时间选择器  *************************************************
+
+    public static final int USER_CHOOSE_TIME = 0x945;
+
+    public void PopTimerChoose(){
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Window window = dialog.getWindow();
+        window.setContentView(R.layout.user_choose_time);
+        window.setBackgroundDrawable(new ColorDrawable(0));
+        WindowManager.LayoutParams lp = window.getAttributes();
+        window.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        lp.width = getScreenWidth(getWindowManager()) - dip2px(this,50);
+        window.setAttributes(lp);
+        dialog.show();
+
+        final MaterialCalendarView calendarView = (MaterialCalendarView) window.findViewById(R.id.user_choose_time_calendarview);
+        calendarView.state().edit()
+                .setFirstDayOfWeek(Calendar.WEDNESDAY)
+//                .setMinimumDate(CalendarDay.from(2016, 4, 3))
+//                .setMaximumDate(CalendarDay.from(2016, 5, 12))
+                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .commit();
+
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                getMyHandler().obtainMessage(USER_CHOOSE_TIME,date).sendToTarget();
+                dialog.dismiss();
+            }
+        });
+
+
+
+    }
 
 
 }

@@ -25,7 +25,6 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.greendao.query.Query;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import carbon.widget.ImageView;
@@ -74,7 +73,8 @@ public class GZList extends BaseActivity implements XRecyclerView.LoadingListene
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(SearchGzFragment.SEARCH_BEANS,(ArrayList)gZbeanLists);
+//                bundle.putSerializable(SearchGzFragment.SEARCH_BEANS,(ArrayList)gZbeanLists);
+                bundle.putString(SearchGzFragment.WHERE,SearchGzFragment.GZLIST);
                 SearchGzFragment dialog = SearchGzFragment.getInstance(bundle);
                 dialog.show(GZList.this.getSupportFragmentManager(),"selectGzTag");
             }

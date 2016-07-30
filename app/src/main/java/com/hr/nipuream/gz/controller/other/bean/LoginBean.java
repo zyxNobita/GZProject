@@ -22,6 +22,16 @@ public class LoginBean implements Serializable{
      */
     private int su;
 
+    private int userid;
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -52,6 +62,7 @@ public class LoginBean implements Serializable{
                 "status=" + status +
                 ", message='" + message + '\'' +
                 ", su=" + su +
+                ", userid=" + userid +
                 '}';
     }
 }

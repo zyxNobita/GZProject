@@ -24,6 +24,11 @@ public class SpUtil {
      */
     public static final String SP_GZ_LIST_LAST_UPDATE_TIME = "sp.gzlist.last.update.time";
 
+    /**
+     * UserId
+     */
+    public static final String SP_GZ_USER_ID = "sp.gz.userid";
+
     private SpUtil(){
         pre = GZApplication.getInstance().getSharedPreferences(
                 "com.hr.nipuream.gz", Context.MODE_PRIVATE);

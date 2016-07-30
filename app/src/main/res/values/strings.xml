@@ -17,5 +17,11 @@
     <string name="login_error">账户和密码不能为空</string>
     <string name="gz_check">国资清查</string>
     <string name="gz_repair">国资维修</string>
+    <string name="gz_no_data">没有任何数据</string>
+    <string name="gz_add_repair">添加维修</string>
+    <string name="gz_add_successfully">添加成功</string>
+    <string name="gz_scano_not_empty">资产编号不能为空</string>
+    <string name="gz_fix_persion_not_empty">维修人不能为空</string>
+    <string name="gz_problem_desc_not_empty">问题描述不能为空</string>
 
 </resources>
