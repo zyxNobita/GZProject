@@ -41,6 +41,11 @@ public class Constants {
      */
     public static final String QUERY_REPAIR_LIST = "api/getSacMaintainList.action";
 
+    /**
+     * 添加维修记录
+     */
+    public static final String ADD_REPAIR_RECODE = "api/addSacMaintainInfo.action";
+
 
 
 }

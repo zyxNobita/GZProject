@@ -11,18 +11,20 @@
     app:carbon_rippleColor="?attr/carbon_rippleColor"
     >
 
-
-    <carbon.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/gz_repair_recyleview"
+    
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
+        android:text="非得死覅士大夫"
+        android:gravity="center"
         />
+
+    <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
+        <!--android:id="@+id/gz_repair_recyleview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scrollbars="vertical"-->
+        <!--android:background="@color/red"-->
+        <!--/>-->
 
 </carbon.widget.LinearLayout>

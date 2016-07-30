@@ -89,6 +89,10 @@ public class XRecyclerView extends RecyclerView {
         }
     }
 
+    public boolean  isLoadMore(){
+        return isLoadingData;
+    }
+
     public void setNoMore(boolean noMore){
         this.isNoMore = noMore;
         View footView = mFootViews.get(0);
@@ -113,6 +117,11 @@ public class XRecyclerView extends RecyclerView {
 
     public void refreshComplete() {
         mRefreshHeader.refreshComplete();
+        isRersh = false;
+    }
+
+    public boolean isRersh(){
+        return isRersh;
     }
 
     public void setRefreshHeader(ArrowRefreshHeader refreshHeader) {
@@ -198,6 +207,8 @@ public class XRecyclerView extends RecyclerView {
         }
     }
 
+    private boolean isRersh = false;
+
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (mLastY == -1) {
@@ -225,6 +236,7 @@ public class XRecyclerView extends RecyclerView {
                     if (mRefreshHeader.releaseAction()) {
                         if (mLoadingListener != null) {
                             mLoadingListener.onRefresh();
+                            isRersh = true;
                         }
                     }
                 }

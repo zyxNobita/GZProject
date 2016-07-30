@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<carbon.widget.FrameLayout
-    android:id="@+id/gz_repair_container"
+<carbon.widget.LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:carbon_insetColor="?attr/colorPrimary"
+    app:carbon_rippleColor="?attr/carbon_rippleColor"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.hr.nipuream.gz.controller.main.activity.GZRepair">
 
 
+    <carbon.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <carbon.widget.ImageView
+            android:id="@+id/gz_repair_list_search_iv"
+            android:layout_width="@dimen/carbon_toolbarHeight"
+            android:layout_height="@dimen/carbon_toolbarHeight"
+            app:carbon_src="@raw/ic_search_24px"
+            app:carbon_tint="#ffffffff"
+            android:clickable="true"
+            app:carbon_rippleColor="?attr/carbon_rippleColor"
+            app:carbon_rippleStyle="borderless"
+            android:padding="@dimen/carbon_padding"/>
+
+        <carbon.widget.ImageView
+            android:id="@+id/gz_repair_list_plus_iv"
+            android:layout_width="@dimen/carbon_toolbarHeight"
+            android:layout_height="@dimen/carbon_toolbarHeight"
+            app:carbon_src="@raw/plus_24px"
+            app:carbon_tint="#ffffffff"
+            android:clickable="true"
+            app:carbon_rippleColor="?attr/carbon_rippleColor"
+            app:carbon_rippleStyle="borderless"
+            android:padding="18dp"/>
 
 
+    </carbon.widget.Toolbar>
 
 
-</carbon.widget.FrameLayout>
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/gz_repair_recyleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        />
+
+</carbon.widget.LinearLayout>

@@ -31,4 +31,16 @@
         android:paddingRight="@dimen/carbon_padding"
         android:textAppearance="?attr/carbon_textAppearanceBody2" />
 
+    <TextView
+        android:id="@+id/search_item_problem_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/carbon_padding"
+        android:layout_below="@+id/search_item_name"
+        android:paddingRight="@dimen/carbon_padding"
+        android:layout_marginBottom="8dp"
+        android:textAppearance="?attr/carbon_textAppearanceBody2" />
+
+
 </carbon.widget.CardView>

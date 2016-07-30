@@ -1,10 +1,17 @@
 package com.hr.nipuream.gz.base;
 
 
-import android.app.Activity;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
+import com.hr.nipuream.gz.GZApplication;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -18,20 +25,33 @@ public abstract class BaseFragment extends Fragment {
 
     private static MyHandler myHandler;
 
-    private static class MyHandler extends Handler {
 
-        private WeakReference<Activity> ref;
+    public static class MyHandler extends Handler{
 
-        public MyHandler(WeakReference<Activity> ref){
+        private WeakReference<Fragment> ref;
+
+        public MyHandler(WeakReference<Fragment> ref){
             this.ref = ref;
         }
 
         @Override
         public void handleMessage(Message msg) {
-            ((BaseActivity)ref.get()).handleMessage(msg);
+            super.handleMessage(msg);
+            ((BaseFragment)(ref.get())).handlerGZData(msg);
         }
     }
 
+    public void handlerGZData(Message msg){
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        GZApplication.getInstance().getEventBus().register(this);
+        myHandler = new MyHandler(new WeakReference<Fragment>(this));
+        registerTask();
+    }
 
     public static Handler getMyHandler(){
         if(myHandler == null)
@@ -39,10 +59,20 @@ public abstract class BaseFragment extends Fragment {
         return myHandler;
     }
 
-    public void handleMessage(Message msg){}
+
+    public void registerTask(){};
 
 
+    @Override
+    public void onDestroy() {
+        GZApplication.getInstance().getEventBus().unregister(this);
+        super.onDestroy();
+    }
 
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void updateGzData(Object object){
+
+    }
 
 }

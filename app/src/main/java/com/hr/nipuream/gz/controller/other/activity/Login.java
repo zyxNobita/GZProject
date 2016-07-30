@@ -106,6 +106,9 @@ public class Login extends BaseActivity {
                     SpUtil.getInstance().insertToxml(userName, pwd);
                     SpUtil.getInstance().insertToxml(SpUtil.SP_ISLOGIN, "true");
 
+                    if(!TextUtils.isEmpty(String.valueOf(loginBean.getUserid())))
+                        SpUtil.getInstance().insertToxml(SpUtil.SP_GZ_USER_ID,String.valueOf(loginBean.getUserid()));
+
                     startActivity(new Intent(this, MainActivity.class));
                     this.finish();
 
