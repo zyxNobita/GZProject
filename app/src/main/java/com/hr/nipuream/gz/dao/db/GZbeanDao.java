@@ -99,7 +99,7 @@ public class GZbeanDao extends AbstractDao<GZbean, Long> {
                 "\"DEPTNAME\" TEXT," + // 3: deptname
                 "\"ENTRYDATE\" TEXT," + // 4: entrydate
                 "\"ETIME\" TEXT," + // 5: etime
-                "\"FACTORYNUMBER\" TEXT NOT NULL ," + // 6: factorynumber
+                "\"FACTORYNUMBER\" TEXT," + // 6: factorynumber
                 "\"FADATE\" TEXT," + // 7: fadate
                 "\"FAOPINION\" TEXT," + // 8: faopinion
                 "\"FAPERSON\" TEXT," + // 9: faperson
@@ -184,7 +184,11 @@ public class GZbeanDao extends AbstractDao<GZbean, Long> {
         if (etime != null) {
             stmt.bindString(6, etime);
         }
-        stmt.bindString(7, entity.getFactorynumber());
+ 
+        String factorynumber = entity.getFactorynumber();
+        if (factorynumber != null) {
+            stmt.bindString(7, factorynumber);
+        }
  
         String fadate = entity.getFadate();
         if (fadate != null) {
@@ -395,7 +399,11 @@ public class GZbeanDao extends AbstractDao<GZbean, Long> {
         if (etime != null) {
             stmt.bindString(6, etime);
         }
-        stmt.bindString(7, entity.getFactorynumber());
+ 
+        String factorynumber = entity.getFactorynumber();
+        if (factorynumber != null) {
+            stmt.bindString(7, factorynumber);
+        }
  
         String fadate = entity.getFadate();
         if (fadate != null) {
@@ -591,7 +599,7 @@ public class GZbeanDao extends AbstractDao<GZbean, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // deptname
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // entrydate
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // etime
-            cursor.getString(offset + 6), // factorynumber
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // factorynumber
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // fadate
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // faopinion
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // faperson
@@ -651,7 +659,7 @@ public class GZbeanDao extends AbstractDao<GZbean, Long> {
         entity.setDeptname(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setEntrydate(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setEtime(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setFactorynumber(cursor.getString(offset + 6));
+        entity.setFactorynumber(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setFadate(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setFaopinion(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setFaperson(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));

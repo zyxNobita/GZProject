@@ -46,7 +46,7 @@ apt {
 }
 
 greendao {
-    schemaVersion 2
+    schemaVersion 3
     daoPackage "com.hr.nipuream.gz.dao.db"
     targetGenDir "E://github/GZ/GZ/app/src/main/java"
 }

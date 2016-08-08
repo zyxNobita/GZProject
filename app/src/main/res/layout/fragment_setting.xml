@@ -13,11 +13,170 @@
         android:layout_height="wrap_content"
         app:carbon_icon="@null"/>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <carbon.widget.RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="正在开发中" />
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:clickable="true"
+        app:carbon_rippleColor="#3F51B5"
+        app:carbon_touchMarginBottom="6dp"
+        app:carbon_touchMarginLeft="100dp"
+        app:carbon_touchMarginRight="100dp"
+        app:carbon_touchMarginTop="6dp"
+        app:carbon_backgroundTint="@null"
+        >
+
+        <com.huizai.widget.view.CircleImageView
+            android:id="@+id/setting_circleImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/logo"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_centerVertical="true"
+            app:border_width="1dp"
+            app:border_color="@color/white"
+            />
+
+
+        <carbon.widget.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:layout_marginLeft="5sp"
+            android:textAppearance="?attr/carbon_textAppearanceTitle"
+            android:layout_toRightOf="@+id/setting_circleImageView"
+            android:layout_centerVertical="true"
+            />
+
+    </carbon.widget.RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_grap_bg"
+        />
+
+    <carbon.widget.TextView
+        android:id="@+id/setting_fix"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="我的维修"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:textAppearance="?attr/carbon_textAppearanceSubhead"
+        android:clickable="true"
+        app:carbon_rippleColor="#3F51B5"
+        app:carbon_touchMarginBottom="6dp"
+        app:carbon_touchMarginLeft="100dp"
+        app:carbon_touchMarginRight="100dp"
+        app:carbon_touchMarginTop="6dp"
+        app:carbon_backgroundTint="@null"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_grap_bg"
+        />
+
+        <carbon.widget.TextView
+            android:id="@+id/about_gz"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="关于国资"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:textAppearance="?attr/carbon_textAppearanceSubhead"
+            android:clickable="true"
+            app:carbon_rippleColor="#3F51B5"
+            app:carbon_touchMarginBottom="6dp"
+            app:carbon_touchMarginLeft="100dp"
+            app:carbon_touchMarginRight="100dp"
+            app:carbon_touchMarginTop="6dp"
+            app:carbon_backgroundTint="@null"
+            />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_grap_bg"
+        />
+
+
+    <carbon.widget.LinearLayout
+        android:id="@+id/version_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clickable="true"
+        app:carbon_rippleColor="#3F51B5"
+        app:carbon_touchMarginBottom="6dp"
+        app:carbon_touchMarginLeft="100dp"
+        app:carbon_touchMarginRight="100dp"
+        app:carbon_touchMarginTop="6dp"
+        app:carbon_backgroundTint="@null"
+        >
+
+        <carbon.widget.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="版本更新"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:textAppearance="?attr/carbon_textAppearanceSubhead"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="1dp"
+            />
+
+        <carbon.widget.TextView
+            android:id="@+id/version_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新版本"
+            android:textAppearance="?attr/carbon_textAppearanceBody2"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:background="@drawable/update_version_tv_shape"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            />
+
+
+    </carbon.widget.LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_grap_bg"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <carbon.widget.Button
+        android:id="@+id/login_out"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:text="退 出"
+        app:carbon_cornerRadius="2dp"
+        app:carbon_rippleColor="#42ffffff"
+        app:carbon_rippleStyle="over"
+        app:carbon_touchMargin="6dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        />
+
+
 
 </carbon.widget.LinearLayout>

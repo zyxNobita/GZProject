@@ -17,6 +17,12 @@ public class Constants {
 
 
     /**
+     * 每页会显示多少个数据
+     */
+    public static final int EVERY_PAGE_ITEMS = 10;
+
+
+    /**
      * 登录
      */
     public static final String LOGIN = "api/login.action";

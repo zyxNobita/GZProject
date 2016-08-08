@@ -127,16 +127,23 @@ public class MainActivity extends BaseActivity {
 
     private UpdateBean updateBean;
 
+    public UpdateBean getUpdateBean(){
+        return updateBean;
+    }
+
     @Override
     public void updateGZdata(Object object) {
         super.updateGZdata(object);
+
         if (object instanceof UpdateBaseTask) {
             updateBean = (UpdateBean) ((UpdateBaseTask) object).getBean();
             Logger.getLogger().d(updateBean.toString());
             if (updateBean != null)
-                if (!Util.getVerName().equals(updateBean.getVersionIndex()))
-                    doNewVersionUpdate(getMyHandler(), updateBean);
+                if (!Util.getVerName().equals(updateBean.getVersionIndex())){
+                        doNewVersionUpdate(getMyHandler(), updateBean);
+                }
         }
+
     }
 
     @Override

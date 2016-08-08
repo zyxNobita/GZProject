@@ -28,7 +28,7 @@ public abstract  class GZBaseTask extends NetTaskImpl{
     public static final String QUERY_GZ_LIST_URL = Constants.BASE_URL + Constants.QUERY_GZ_LIST;
     public static final String QUERY_GZ_LIST_TAG = "query.gz.list.tag";
 
-    public static final String ID = "id";
+    public static final String ID = "createtime";
     public static final String EVERY_PAGE = "everypage";
     public static final String CURRENT_PAGE = "currentpage";
 

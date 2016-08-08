@@ -1,32 +1,36 @@
 package com.hr.nipuream.gz.controller.main.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
-
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hr.nipuream.gz.GZApplication;
 import com.hr.nipuream.gz.R;
 import com.hr.nipuream.gz.base.BaseActivity;
 import com.hr.nipuream.gz.controller.main.adapter.GZListAdapter;
 import com.hr.nipuream.gz.controller.main.bean.GZbean;
 import com.hr.nipuream.gz.controller.main.fragment.SearchGzFragment;
-import com.hr.nipuream.gz.controller.main.task.MainBeanFactory;
-import com.hr.nipuream.gz.controller.main.task.net.GZBaseTask;
 import com.hr.nipuream.gz.dao.SpUtil;
 import com.hr.nipuream.gz.dao.db.GZbeanDao;
-import com.hr.nipuream.gz.net.NetQueryMethod;
-import com.hr.nipuream.gz.net.NetQueryStyle;
-import com.hr.nipuream.gz.net.NetTaskInterface;
+import com.hr.nipuream.gz.net.Constants;
+import com.hr.nipuream.gz.net.NetUtil;
 import com.hr.nipuream.gz.util.Logger;
+import com.hr.nipuream.gz.util.QueryOffLineData;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-
 import org.greenrobot.greendao.query.Query;
-
+import org.json.JSONObject;
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import carbon.widget.ImageView;
 import carbon.widget.Toolbar;
 
@@ -37,28 +41,139 @@ import carbon.widget.Toolbar;
 public class GZList extends BaseActivity implements XRecyclerView.LoadingListener{
 
     private XRecyclerView recyclerView;
-    private GZBaseTask gzBaseTask;
+//    private GZBaseTask gzBaseTask;
 
+    /**
+     * 当前的页数
+     */
     private int currentPage = 1;
 
+    /**
+     * 数据库操作对象
+     */
     private GZbeanDao gZbeanDao;
 
+    private AlertDialog dialog;
 
+
+    @Override
+    public void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        try{
+            if(msg.what == NetUtil.NET_UTIL_PROGRESS_UPDATE){
+                int progress = (int) msg.obj;
+                setDownLineDialogProgress(progress);
+            }else if(msg.what == NetUtil.NET_UTIL_EXECUTE_COMPELETE){
+                getMyHandler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeDownLineDialog();
+                    }
+                },500);
+            }else if(msg.what == NetUtil.NET_UTIL_EXECUTE_ERROR){
+                getMyHandler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeDownLineDialog();
+                    }
+                },500);
+            }
+        }catch (Exception e){
+            Logger.getLogger().e(e.toString());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gzlist);
         setViews();
-        PopLoadDialog(this);
-        getData();
+//      getData();
+        queryDataForLocal();
     }
+
+    private void queryDataForLocal(){
+        try{
+            int count = (int) gZbeanDao.queryBuilder().count();
+
+            if(count > 0)
+            {
+
+                pages = (count % Constants.EVERY_PAGE_ITEMS == 0)?
+                        count/Constants.EVERY_PAGE_ITEMS:count/Constants.EVERY_PAGE_ITEMS+1;
+
+                //第一次进来
+                gZbeanLists.addAll(offsizeDataFromLocal(currentPage - 1));
+                refreshDatas(gZbeanLists);
+
+            }else
+            {
+                //提示用户下载离线数据
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(getString(R.string.tips));
+                builder.setMessage(getString(R.string.update_offline_data));
+                builder.setPositiveButton(getString(R.string.sure), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        PopDownLoadOffLineData();
+
+                        ExecutorService exec = Executors.newCachedThreadPool();
+                        try {
+                            Future<String> execResult = exec.submit(new QueryOffLineData());
+                            String requestData = execResult.get();
+
+                            JSONObject jsonObject = new JSONObject(requestData);
+
+                            String resultMessage = jsonObject.optString("message");
+                            String maxTime = jsonObject.optString("maxtime");
+                            if(!TextUtils.isEmpty(maxTime))
+                                SpUtil.getInstance().insertToxml(SpUtil.SP_GZ_LIST_LAST_UPDATE_TIME,maxTime);
+
+                            if(!TextUtils.isEmpty(resultMessage))
+                                showToast(resultMessage);
+                            if(Integer.parseInt(jsonObject.optString("status"))==0){
+                                List ts = new Gson().fromJson(jsonObject.optJSONObject("data").optJSONArray("result").toString(),new TypeToken<List<GZbean>>(){}.getType());
+                                try{
+                                    //批量插到库中
+                                    gZbeanDao.insertOrReplaceInTx(ts);
+                                }catch (Exception e){
+                                    Logger.getLogger().w(e.toString());
+                                }
+                            }
+
+                            gZbeanLists.clear();
+                            gZbeanLists.addAll(offsizeDataFromLocal(currentPage-1));
+
+                            refreshDatas(gZbeanLists);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }finally {
+                            exec.shutdown();
+                        }
+                    }
+                });
+                builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog = builder.create();
+                dialog.show();
+            }
+        }catch (Exception e){
+            Logger.getLogger().e(e.toString());
+        }
+    }
+
 
     @Override
     protected void registerGZTask() {
         super.registerGZTask();
         gZbeanDao = GZApplication.getInstance().getDaoSession().getGZbeanDao();
-        gzBaseTask = (GZBaseTask) MainBeanFactory.getInstance().newMainInstance("gz");
+//        gzBaseTask = (GZBaseTask) MainBeanFactory.getInstance().newMainInstance("gz");
     }
 
     private void setViews(){
@@ -82,88 +197,38 @@ public class GZList extends BaseActivity implements XRecyclerView.LoadingListene
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         recyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
+        recyclerView.setPullRefreshEnabled(false);
         recyclerView.setLoadingListener(this);
     }
 
-    private void getData(){
-        String lastId = SpUtil.getInstance().getValueFromXml(SpUtil.SP_GZ_LIST_LAST_UPDATE_TIME);
-        String requestTime = TextUtils.isEmpty(lastId)?"2015-01-01 00:00:00":lastId;
-        queryGZList(requestTime,"");
+
+    private void refreshDatas(List<GZbean> gZbeanLists){
+        if(adapter == null){
+            adapter = new GZListAdapter(gZbeanLists);
+            recyclerView.setAdapter(adapter);
+        }
+        else
+            adapter.setItem(gZbeanLists);
     }
 
-    private void queryGZList(String requestId,String scanNo){
-        Bundle bundle = new Bundle();
-        bundle.putString(GZBaseTask.ID,requestId);
-        bundle.putSerializable(GZBaseTask.TYPE_ID,"1");
-        bundle.putString(GZBaseTask.EVERY_PAGE,"10");
-        bundle.putString(GZBaseTask.CURRENT_PAGE,String.valueOf(currentPage));
-        bundle.putString(GZBaseTask.SCAN_NO,scanNo);
-        gzBaseTask.queryBeans(bundle, NetQueryStyle.VOLLEY);
-    }
 
     private List<GZbean> offsizeDataFromLocal(int off){
         Query<GZbean> query = gZbeanDao.queryBuilder().orderDesc
-                (GZbeanDao.Properties.Id).offset(10*off).limit(10).build();
+                (GZbeanDao.Properties.Id).offset(Constants.EVERY_PAGE_ITEMS*off).
+                limit(Constants.EVERY_PAGE_ITEMS).build();
         return query.list();
     }
 
-    private List<GZbean> gZbeanLists;
+    private List<GZbean> gZbeanLists = new ArrayList<>();
     private int pages;
     private GZListAdapter adapter;
+
+
 
     @Override
     public void updateGZdata(Object object) {
         super.updateGZdata(object);
-
-        dismissLoadDialog();
-        recyclerView.refreshComplete();
-        recyclerView.loadMoreComplete();
-
-        if(object instanceof GZBaseTask){
-
-            int method = ((GZBaseTask) object).getExecuteMethod();
-            if(method == NetQueryMethod.QUERY_ALL){
-
-                showToast(((GZBaseTask) object).getResultMessage());
-
-
-                switch (((GZBaseTask) object).getResultCode()){
-                    case NetTaskInterface.REQUEST_SUCCESSFUL:
-                    {
-                        pages = ((GZBaseTask) object).getPages();
-
-                        try{
-                            gZbeanDao.insertOrReplaceInTx(((GZBaseTask) object).getBeans());
-                        }catch (Exception e){
-                            Logger.getLogger().w(e.toString());
-                        }
-
-                        gZbeanLists = offsizeDataFromLocal(currentPage-1);
-
-                        if(adapter == null){
-                            adapter = new GZListAdapter(gZbeanLists);
-                            recyclerView.setAdapter(adapter);
-                        }
-                        else
-                           adapter.setItem(gZbeanLists);
-                        //save local
-                        SpUtil.getInstance().insertToxml(SpUtil.SP_GZ_LIST_LAST_UPDATE_TIME,
-                                ((GZBaseTask) object).getBundle().getString("maxtime"));
-                    }
-                    break;
-                    default:
-                    {
-                        //todo 从本地加载
-                        gZbeanLists = offsizeDataFromLocal(currentPage - 1);
-                        adapter = new GZListAdapter(gZbeanLists);
-                        recyclerView.setAdapter(adapter);
-                    }
-                    break;
-                }
-
-            }
-        }
-        else if(object instanceof GZbean){
+        if(object instanceof GZbean){
             Intent intent = new Intent(this, GZDetail.class);
             intent.putExtra(SearchGzFragment.GO_TO_DETAIL,(GZbean)object);
             startActivity(intent);
@@ -172,33 +237,26 @@ public class GZList extends BaseActivity implements XRecyclerView.LoadingListene
 
     @Override
     public void onRefresh() {
-        try{
-            currentPage = 1;
-            getData();
-        }catch (Exception e){
-            Logger.getLogger().w(e.toString());
-        }
 
     }
 
     @Override
     public void onLoadMore() {
+        //修改成只从本地加载
         try{
             if(currentPage < pages){
-                if(recyclerView != null){
-                    recyclerView.setLoadingMoreEnabled(true);
-                }
-                currentPage++;
-                offsizeDataFromLocal(currentPage-1);
+
+                if(recyclerView != null) recyclerView.setLoadingMoreEnabled(true);
+                currentPage ++;
+                gZbeanLists.addAll(offsizeDataFromLocal(currentPage-1));
+                refreshDatas(gZbeanLists);
+
             }else{
-                if(recyclerView != null){
-                    recyclerView.setLoadingMoreEnabled(false);
-                }
+                if(recyclerView != null) recyclerView.setLoadingMoreEnabled(false);
             }
         }catch (Exception e){
             Logger.getLogger().e(e.toString());
         }finally {
-            recyclerView.refreshComplete();
             recyclerView.loadMoreComplete();
         }
     }

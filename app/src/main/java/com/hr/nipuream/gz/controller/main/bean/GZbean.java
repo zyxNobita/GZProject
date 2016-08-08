@@ -24,7 +24,6 @@ public class GZbean implements Serializable{
     private String entrydate;
     private String etime;
 
-    @NotNull
     private String factorynumber;
     private String fadate;
     private String faopinion;
@@ -104,11 +103,11 @@ public class GZbean implements Serializable{
     private String voucherno;
 
 
-    @Generated(hash = 788678774)
+    @Generated(hash = 1109161184)
     public GZbean(String accounttype, String approvalnumber,
             @NotNull String createtime, String deptname, String entrydate,
-            String etime, @NotNull String factorynumber, String fadate,
-            String faopinion, String faperson, int fastaus, String financialclass,
+            String etime, String factorynumber, String fadate, String faopinion,
+            String faperson, int fastaus, String financialclass,
             String fundssource, long id, String lat, String lng, String macname,
             @NotNull String mid, @NotNull String nowstatus, String organization,
             String projectnumber, String purchasedate, String qrphoto,

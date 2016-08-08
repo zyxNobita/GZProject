@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">登 录</string>
+    <string name="login_result_error">登录失败</string>
     <string name="main">首 页</string>
     <string name="gzmanager">国资管理</string>
     <string name="setting">设 置</string>
@@ -23,5 +24,19 @@
     <string name="gz_scano_not_empty">资产编号不能为空</string>
     <string name="gz_fix_persion_not_empty">维修人不能为空</string>
     <string name="gz_problem_desc_not_empty">问题描述不能为空</string>
+    <string name="tips">提示</string>
+    <string name="update_offline_data">没有任何数据，确定下载离线数据？</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="down_load_offline_data">正在下载离线数据...</string>
+    <string name="no_update_data">当前国资信息为最新数据，无需下载!</string>
+    <string name="update_successfully">更新数据成功</string>
+    <string name="udpate_error">更新数据失败</string>
+    <string name="version_update">版本更新</string>
+    <string name="already_is_new_version">已经是最新版本</string>
+    <string name="has_find_new_version">发现新版本 : </string>
+    <string name="update_version">升级</string>
+    <string name="has_new_version">有新版本</string>
+    <string name="user_refuse_open_camera">用户拒绝打开摄像头</string>
 
 </resources>

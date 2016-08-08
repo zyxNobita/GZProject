@@ -100,18 +100,29 @@ public class Login extends BaseActivity {
             if (method == NetQueryMethod.ADD_ONE) {
                 int resultCode = ((LoginBaseTask) object).getResultCode();
                 if (resultCode == NetTaskInterface.REQUEST_SUCCESSFUL) {
+
                     LoginBean loginBean =
+
                             (LoginBean) ((LoginBaseTask) object).getBean();
-                    showToast(loginBean.getMessage());
-                    SpUtil.getInstance().insertToxml(userName, pwd);
-                    SpUtil.getInstance().insertToxml(SpUtil.SP_ISLOGIN, "true");
 
-                    if(!TextUtils.isEmpty(String.valueOf(loginBean.getUserid())))
-                        SpUtil.getInstance().insertToxml(SpUtil.SP_GZ_USER_ID,String.valueOf(loginBean.getUserid()));
+                    int su = loginBean.getSu();
 
-                    startActivity(new Intent(this, MainActivity.class));
-                    this.finish();
+                    if(su == 1){
+                        //成功
+                        showToast(loginBean.getMessage());
+                        SpUtil.getInstance().insertToxml(userName, pwd);
+                        SpUtil.getInstance().insertToxml(SpUtil.SP_ISLOGIN, "true");
 
+                        if(!TextUtils.isEmpty(String.valueOf(loginBean.getUserid())))
+                            SpUtil.getInstance().insertToxml(SpUtil.SP_GZ_USER_ID,String.valueOf(loginBean.getUserid()));
+
+                        startActivity(new Intent(this, MainActivity.class));
+                        this.finish();
+                    }
+                    else{
+                        //失败
+                        showToast(getResources().getString(R.string.login_result_error));
+                    }
                 } else
                     showToast(getResources().getString(R.string.net_error));
             }

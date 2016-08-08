@@ -3,6 +3,7 @@ package com.hr.nipuream.gz.base;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.DisplayMetrics;
@@ -22,7 +24,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.hr.nipuream.gz.GZApplication;
 import com.hr.nipuream.gz.R;
@@ -43,7 +44,6 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 
-import carbon.widget.Button;
 import carbon.widget.ProgressBar;
 import carbon.widget.Snackbar;
 
@@ -308,39 +308,39 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     //********************************************************** 显示dialog *******************************************************************
 
     public static final int DOWN_LOAD_APPLICATION=0x75;
+
     /**
      * 是否下载app?
      */
     public void doNewVersionUpdate( final Handler mHandler, UpdateBean updateBean) {
 
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        Window window = dialog.getWindow();
-        window.setContentView(R.layout.app_update_layout);
-        window.setBackgroundDrawable(new ColorDrawable(0));
-        WindowManager.LayoutParams lp = window.getAttributes();
-        window.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        lp.width = getScreenWidth(getWindowManager()) - dip2px(this,50);
-        window.setAttributes(lp);
-        dialog.show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.version_update));
 
-//        ImageView exit = (ImageView)window.findViewById(R.id.app_update_exit);
-        Button exit = (Button)window.findViewById(R.id.app_update_exit);
-        Button submit = (Button) window.findViewById(R.id.app_update_ok);
-        TextView messageContent = (TextView)window.findViewById(R.id.update_content);
 
         //版本比较
+
         if(Util.getVerName().equals(updateBean.getVersionIndex())){
-            messageContent.setText("已经是最新版本");
-            submit.setVisibility(View.GONE);
-            exit.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
+
+            builder.setMessage(getString(R.string.already_is_new_version));
+            builder.setNegativeButton(getString(R.string.sure), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
+                    mHandler.obtainMessage(DOWN_LOAD_APPLICATION,false).sendToTarget();
                 }
             });
+
+//            messageContent.setText("已经是最新版本");
+//            submit.setVisibility(View.GONE);
+//            exit.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                }
+//            });
         }else{
             StringBuffer sb = new StringBuffer();
-            sb.append("发现新版本 : "
+            sb.append(getString(R.string.has_find_new_version)
                     + updateBean.getVersionId() + "\n");
             //			sb.append("更新内容:" + "\n\n");
             String info = updateBean.getUpgradecontent();
@@ -354,9 +354,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 //                sb.append(i+1).append(".").append(infos[i]).append("\n");
 //            }
 
-            messageContent.setText(Html.fromHtml(info));
-            submit.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
+            builder.setMessage(Html.fromHtml(info));
+            builder.setPositiveButton(getString(R.string.update_version), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     if(Util.isServiceRunning(UpdateVersionServer.class.getName())){
                         showToast(getString(R.string.downloading));
@@ -365,14 +366,99 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                     }
                 }
             });
-
-            exit.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
+            builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     mHandler.obtainMessage(DOWN_LOAD_APPLICATION,false).sendToTarget();
                 }
             });
+
+
+//            messageContent.setText(Html.fromHtml(info));
+//            submit.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                    if(Util.isServiceRunning(UpdateVersionServer.class.getName())){
+//                        showToast(getString(R.string.downloading));
+//                    }else{
+//                        mHandler.obtainMessage(DOWN_LOAD_APPLICATION, true).sendToTarget();
+//                    }
+//                }
+//            });
+//
+//            exit.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                    mHandler.obtainMessage(DOWN_LOAD_APPLICATION,false).sendToTarget();
+//                }
+//            });
         }
+        builder.create().show();
+
+
+
+
+//        final Dialog dialog = new Dialog(this);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        Window window = dialog.getWindow();
+//        window.setContentView(R.layout.app_update_layout);
+//        window.setBackgroundDrawable(new ColorDrawable(0));
+//        WindowManager.LayoutParams lp = window.getAttributes();
+//        window.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+//        lp.width = getScreenWidth(getWindowManager()) - dip2px(this,50);
+//        window.setAttributes(lp);
+//        dialog.show();
+//
+////        ImageView exit = (ImageView)window.findViewById(R.id.app_update_exit);
+//        Button exit = (Button)window.findViewById(R.id.app_update_exit);
+//        Button submit = (Button) window.findViewById(R.id.app_update_ok);
+//        TextView messageContent = (TextView)window.findViewById(R.id.update_content);
+
+//        //版本比较
+//        if(Util.getVerName().equals(updateBean.getVersionIndex())){
+//            messageContent.setText("已经是最新版本");
+//            submit.setVisibility(View.GONE);
+//            exit.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                }
+//            });
+//        }else{
+//            StringBuffer sb = new StringBuffer();
+//            sb.append("发现新版本 : "
+//                    + updateBean.getVersionId() + "\n");
+//            //			sb.append("更新内容:" + "\n\n");
+//            String info = updateBean.getUpgradecontent();
+//
+//            //"优化界面交互  \n 提高用户体验 \n 等其它服务"
+////            info = info.substring(1, info.length()-1);
+////            info = info.trim();
+////            info = info.replace("\\n", "&");
+////            String[]  infos  = info.split("&");
+////            for(int i=0;i<infos.length;i++){
+////                sb.append(i+1).append(".").append(infos[i]).append("\n");
+////            }
+//
+//            messageContent.setText(Html.fromHtml(info));
+//            submit.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                    if(Util.isServiceRunning(UpdateVersionServer.class.getName())){
+//                        showToast(getString(R.string.downloading));
+//                    }else{
+//                        mHandler.obtainMessage(DOWN_LOAD_APPLICATION, true).sendToTarget();
+//                    }
+//                }
+//            });
+//
+//            exit.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//                    mHandler.obtainMessage(DOWN_LOAD_APPLICATION,false).sendToTarget();
+//                }
+//            });
+//        }
     }
 
     //-------------------------------------------------------------------------------------------------------------
@@ -473,10 +559,46 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                 dialog.dismiss();
             }
         });
-
-
-
     }
 
+    //--------------------------------------------------------------------------------------------------------------------
+
+    //****************************************下载离线任务加载框********************************************
+
+    private ProgressBar progressBar;
+    private Dialog downLineDialog;
+
+    public void PopDownLoadOffLineData(){
+        downLineDialog = new Dialog(this);
+        downLineDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Window window = downLineDialog.getWindow();
+        window.setContentView(R.layout.down_load_offline);
+        window.setBackgroundDrawable(new ColorDrawable(0));
+        WindowManager.LayoutParams lp = window.getAttributes();
+        window.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        lp.width = getScreenWidth(getWindowManager()) - dip2px(this,50);
+        window.setAttributes(lp);
+        downLineDialog.setCancelable(false);
+        downLineDialog.show();
+
+        progressBar = (ProgressBar) window.findViewById(R.id.down_load_offline_progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void setDownLineDialogProgress(int progress){
+        if(progressBar != null){
+            progressBar.setProgress(progress);
+        }else{
+            PopDownLoadOffLineData();
+            progressBar.setProgress(progress);
+        }
+    }
+    public void closeDownLineDialog(){
+        if(downLineDialog !=null){
+            downLineDialog.dismiss();
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------------------
 
 }

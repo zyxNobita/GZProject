@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<carbon.widget.LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:carbon_cornerRadius="@dimen/layout_corner_radius"
+    app:carbon_elevation="@dimen/carbon_elevationMax"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    >
+
+    <carbon.widget.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/down_load_offline_data"
+        android:textSize="@dimen/layout_title_size"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        />
+
+    <carbon.widget.ProgressBar
+        android:id="@+id/down_load_offline_progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_margin="@dimen/carbon_padding"
+        app:carbon_barWidth="5dp"
+        app:carbon_tint="@color/app_tint"
+        app:carbon_progressStyle="bar_determinate" />
+
+</carbon.widget.LinearLayout>

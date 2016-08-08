@@ -201,4 +201,6 @@
 	<color name="app_layout_bg">#F0EFEF</color>
 	<!--分割线背景颜色-->
 	<color name="app_grap_bg">#45808080</color>
+
+	<color name="app_tint">#3F51B5</color>
 </resources>

@@ -2,15 +2,12 @@ package com.hr.nipuream.gz.controller.main.task.net.impl;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-
 import com.google.gson.reflect.TypeToken;
 import com.hr.nipuream.gz.controller.main.bean.GZbean;
 import com.hr.nipuream.gz.controller.main.task.net.GZBaseTask;
 import com.hr.nipuream.gz.net.Constants;
 import com.hr.nipuream.gz.net.NetQueryMethod;
-
 import org.json.JSONObject;
-
 import java.util.List;
 
 /**
@@ -20,7 +17,6 @@ import java.util.List;
  * 邮箱：571829491@qq.com
  */
 public class GZTask extends GZBaseTask{
-
 
     @Override
     protected void execSuccess(JSONObject jsonObject, int method) {
@@ -65,9 +61,7 @@ public class GZTask extends GZBaseTask{
         }catch (Exception e){
             setCallBackResponse(REQUEST_ERROR);
         }
-
     }
-
 
     @Override
     public Object queryOneBean(Bundle bundle, int queryStyle) {
